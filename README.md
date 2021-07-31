@@ -1,6 +1,6 @@
-# [Project Root Template](https://github.com/objectivum/project-root-template), by [Objectivum](https://objectivum.eu/)
+# [Project Root Template, Java version](https://github.com/objectivum/project-root-template-java), by [Objectivum](https://objectivum.eu/)
 
-[Use this template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template#creating-a-repository-from-a-template) to create the basic structure/layout for a software project's root directory, technology, and language-agnostic.
+[Use this template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template#creating-a-repository-from-a-template) to create the basic structure/layout for a Java-based software project's root directory.
 
 ## Table of Contents
 
