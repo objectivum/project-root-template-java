@@ -1,4 +1,4 @@
-package eu.objectivum.logging;
+package eu.objectivum.foundation.logging;
 
 import ch.qos.logback.classic.LoggerContext;
 import org.slf4j.*;
@@ -11,7 +11,8 @@ import static org.slf4j.Logger.ROOT_LOGGER_NAME;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Entry point for (extra, <a href="https://www.slf4j.org/">SLF4J</a>-based) logging configuration and capabilities.
+ * Entry point for additional (mostly <a href="https://www.slf4j.org/">SLF4J</a> and <a
+ * href="http://logback.qos.ch/">Logback</a>-based) logging capabilities.
  *
  * @author Octavian Theodor NITA (https://github.com/octavian-nita/)
  * @version 4.0, Mar 30, 2021
@@ -21,7 +22,7 @@ public class Log {
   /**
    * Performs additional logging configuration, like {@link #routeJulToSlf4j() adapting j.u.l to logFor}, etc.
    * <p/>
-   * Should probably be invoked early, during the initialization phase of the application.
+   * Should be invoked early, during the initialization phase of the application.
    */
   public static void config() {
     routeJulToSlf4j();
@@ -72,7 +73,9 @@ public class Log {
     }
   }
 
-  public static Logger log() { return logFor(null); }
+  public static Logger log() {
+    return logFor(null);
+  }
 
   /**
    * @param source if {@code null}, a {@link Logger} instance corresponding to the calling class is retrieved
