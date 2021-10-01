@@ -20,7 +20,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class Log {
 
   /**
-   * Performs additional logging configuration, like {@link #routeJulToSlf4j() adapting j.u.l to logFor}, etc.
+   * Performs additional logging configuration, like {@link #routeJulToSlf4j() adapting j.u.l to SLF4J}, etc.
    * <p/>
    * Should be invoked early, during the initialization phase of the application.
    */
