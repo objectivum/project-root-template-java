@@ -1,6 +1,6 @@
 package eu.objectivum.foundation.i18n;
 
-import lombok.NonNull;
+import jakarta.validation.constraints.NotNull;
 
 import java.text.MessageFormat;
 import java.time.Instant;
@@ -121,7 +121,7 @@ public class SimpleI18n<SELF extends SimpleI18n<SELF>> implements I18n {
   @Override
   public ZoneId getZoneId() {return zoneId;}
 
-  @NonNull
+  @NotNull
   @Override
   public String t(String key, Object... args) {
     if (key == null) {
@@ -139,8 +139,8 @@ public class SimpleI18n<SELF extends SimpleI18n<SELF>> implements I18n {
     return format == null ? message : format.format(args);
   }
 
-  @NonNull
-  protected String message(@NonNull String key, @NonNull Locale locale) {
+  @NotNull
+  protected String message(@NotNull String key, Locale locale) {
     if (resourceBundleSupplier == null) {
       return key;
     }
@@ -167,7 +167,7 @@ public class SimpleI18n<SELF extends SimpleI18n<SELF>> implements I18n {
     return key;
   }
 
-  @NonNull
+  @NotNull
   @Override
   public String l(Instant instant) {
     if (instant == null) {
@@ -182,7 +182,7 @@ public class SimpleI18n<SELF extends SimpleI18n<SELF>> implements I18n {
     return dtf.withLocale(locale).format(instant.atZone(zoneId));
   }
 
-  @NonNull
+  @NotNull
   @SafeVarargs
   protected static <T> Optional<T> firstNonNull(Supplier<T>... suppliers) {
     if (suppliers != null) {

@@ -82,19 +82,20 @@ public class Log {
    * @return a {@link Logger} instance <em>corresponding</em> to the provided {@code source} argument
    */
   public static Logger logFor(final Object source) {
-    if (source == null) {
+    switch (source) {
+    case null:
       try {
         return getLogger(StackWalker.getInstance(RETAIN_CLASS_REFERENCE).getCallerClass());
       } catch (Throwable throwable) {
         return getLogger(ROOT_LOGGER_NAME);
       }
-    } else if (source instanceof Class<?>) {
-      return getLogger((Class<?>) source);
-    } else if (source instanceof String) {
-      return getLogger((String) source);
-    } else if (source instanceof Logger) {
-      return (Logger) source;
-    } else {
+    case Class<?> clazz:
+      return getLogger(clazz);
+    case String string:
+      return getLogger(string);
+    case Logger logger:
+      return logger;
+    default:
       return getLogger(source.getClass());
     }
   }
