@@ -1,6 +1,6 @@
 package eu.objectivum.foundation.i18n;
 
-import lombok.NonNull;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -61,7 +61,7 @@ public interface I18n {
     return ZoneId.systemDefault();
   }
 
-  default @NonNull String t(Object key, Object... args) {
+  default @NotNull String t(Object key, Object... args) {
     return t(key == null ? null : key.toString(), args);
   }
 
@@ -72,10 +72,10 @@ public interface I18n {
    *
    * @return never {@code null}
    */
-  @NonNull String t(String key, Object... args);
+  @NotNull String t(String key, Object... args);
 
   /**
    * @return never {@code null} (at worst, an empty string)
    */
-  @NonNull String l(Instant instant);
+  @NotNull String l(Instant instant);
 }
