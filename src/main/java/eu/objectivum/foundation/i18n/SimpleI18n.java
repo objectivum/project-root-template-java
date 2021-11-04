@@ -8,14 +8,12 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 import static java.lang.System.getProperty;
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 import static java.util.Collections.addAll;
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
 import static java.util.ResourceBundle.getBundle;
+import static org.apache.commons.lang3.ObjectUtils.getFirstNonNull;
 import static org.apache.commons.lang3.StringUtils.appendIfMissing;
 
 /**
@@ -128,7 +126,7 @@ public class SimpleI18n<SELF extends SimpleI18n<SELF>> implements I18n {
       return "";
     }
 
-    final Locale locale = firstNonNull(this::getLocale, this::getDefaultLocale).orElseGet(Locale::getDefault);
+    final Locale locale = getFirstNonNull(this::getLocale, this::getDefaultLocale, Locale::getDefault);
 
     final String message = message(key, locale);
     if (args == null || args.length == 0 || messageFormatSupplier == null) {
@@ -175,27 +173,11 @@ public class SimpleI18n<SELF extends SimpleI18n<SELF>> implements I18n {
     }
 
     final DateTimeFormatter dtf =
-      firstNonNull(this::getDateTimeFormatter, this::getDefaultDateTimeFormatter).orElse(RFC_1123_DATE_TIME);
-    final Locale locale = firstNonNull(this::getLocale, this::getDefaultLocale).orElseGet(Locale::getDefault);
-    final ZoneId zoneId = firstNonNull(this::getZoneId, this::getDefaultZoneId).orElseGet(ZoneId::systemDefault);
+      getFirstNonNull(this::getDateTimeFormatter, this::getDefaultDateTimeFormatter, () -> RFC_1123_DATE_TIME);
+    final Locale locale = getFirstNonNull(this::getLocale, this::getDefaultLocale, Locale::getDefault);
+    final ZoneId zoneId = getFirstNonNull(this::getZoneId, this::getDefaultZoneId, ZoneId::systemDefault);
 
     return dtf.withLocale(locale).format(instant.atZone(zoneId));
-  }
-
-  @NotNull
-  @SafeVarargs
-  protected static <T> Optional<T> firstNonNull(Supplier<T>... suppliers) {
-    if (suppliers != null) {
-      for (Supplier<T> supplier : suppliers) {
-        if (supplier != null) {
-          final T t = supplier.get();
-          if (t != null) {
-            return of(t);
-          }
-        }
-      }
-    }
-    return empty();
   }
 
   /**
