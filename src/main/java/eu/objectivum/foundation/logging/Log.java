@@ -1,6 +1,7 @@
 package eu.objectivum.foundation.logging;
 
 import ch.qos.logback.classic.LoggerContext;
+import jakarta.validation.constraints.NotNull;
 import org.slf4j.*;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
@@ -73,6 +74,7 @@ public class Log {
     }
   }
 
+  @NotNull
   public static Logger log() {
     return logFor(null);
   }
@@ -81,7 +83,8 @@ public class Log {
    * @param source if {@code null}, a {@link Logger} instance corresponding to the calling class is retrieved
    * @return a {@link Logger} instance <em>corresponding</em> to the provided {@code source} argument
    */
-  public static Logger logFor(final Object source) {
+  @NotNull
+  public static Logger logFor(Object source) {
     switch (source) {
     case null:
       try {
